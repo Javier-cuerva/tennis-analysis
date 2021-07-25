@@ -5,10 +5,14 @@ function log {
 
 PROJECT_PATH=/home/javier/projects/tennis
 
+# Pulls database docker image and runs it
+log "Pulling database docker image and running it"
+docker pull mcekovic/uts-database
+docker run -p 5432:5432 -d --name uts-database mcekovic/uts-database
+
 # Starts database container
 log "Starting uts-database"
 docker start uts-database > /dev/null
-
 
 # Moves sql-commands.sql from host to container
 docker exec -it uts-database mkdir /tmp/tennis
